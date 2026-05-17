@@ -18,8 +18,7 @@
 ## 📐 數學原理
 
 對於三維空間中的隱式函數：
-![Sphere](images/sphere.png)
-![Hyperboloid](images/hyperboloid.png)
+
 \[
 f(x,y,z) = 0
 \]
