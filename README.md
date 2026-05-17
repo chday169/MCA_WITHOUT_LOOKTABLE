@@ -72,3 +72,131 @@ def march_cube(voxel, f, threshold=0.0):
                               intersected_edges[i],
                               intersected_edges[i+1]])
     return triangles
+完整 Python 程式請見 marching_cubes_no_lut.py。
+
+📸 執行結果
+演算法成功提取隱式曲面，完全不使用查詢表。以下為兩個範例的輸出圖形。
+
+球體 (Sphere)
+x
+2
++
+y
+2
++
+z
+2
+−
+0.49
+=
+0
+x 
+2
+ +y 
+2
+ +z 
+2
+ −0.49=0
+
+https://images/sphere.png
+
+雙曲面 (Hyperboloid)
+x
+2
++
+y
+2
+−
+2
+z
+2
+−
+0.49
+=
+0
+x 
+2
+ +y 
+2
+ −2z 
+2
+ −0.49=0
+
+https://images/hyperboloid.png
+
+圖片為 Matplotlib 產生的四視角合成圖（3D視角、前視、側視、俯視）。
+
+🎮 與 Scratch / TurboWarp 的整合
+核心邏輯——邊掃描、符號檢測、三角化——可以重構成 Scratch 積木或 TurboWarp 邏輯。利用清單、廣播與自訂積木，可以在教學環境中展示切片曲面或動畫遍歷，非常適合推廣數學與視覺化教育。
+
+🚀 如何執行
+安裝 Python 3.8+
+
+安裝相依套件：
+
+bash
+pip install numpy matplotlib
+執行腳本：
+
+bash
+python marching_cubes_no_lut.py
+彈出的視窗會顯示 3D 曲面，可使用滑鼠拖曳旋轉視角。
+
+📂 專案結構
+text
+MCA-WITHOUT-LOOKUPTABLE/
+├── images/
+│   ├── author.jpg               (作者照片)
+│   ├── sphere.png               (球體成果圖)
+│   └── hyperboloid.png          (雙曲面成果圖)
+├── marching_cubes_no_lut.py     (主要演算法實作)
+├── extended_abstract.html       (英文擴展摘要)
+├── about-me.html                (作者介紹，中英文)
+├── README.md                    (本檔)
+└── LICENSE                      (MIT 授權)
+👤 作者
+<img src="images/author.jpg" alt="C.H. Tai" width="100" style="border-radius: 50%;" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '<span style="display:inline-block; width:100px; height:100px; border-radius:50%; background:#2c7da0; color:white; text-align:center; line-height:100px; font-size:2rem;">CT</span>');">
+
+戴清河 (C.H. Day(chday169))
+土木及水利工程技師 (退休)
+喜愛分享數學概念、工程實用程式與 3D 數學製圖。
+📄 關於作者 (更多詳情)
+
+📄 授權
+MIT License。詳見 LICENSE 檔案。
+
+🔗 引用
+若在學術或教育工作中參考本方法，建議引用：
+
+C.H. Tai. Geometric Marching Cubes Without Lookup Tables: From 2D Marching Squares to 3D Implicit Surface Reconstruction. GitHub repository, 2026. https://github.com/chday169/MCA_WITHOUT_LOOKTABLE
+
+保持好奇 · 享受幾何
+Stay curious · Enjoy geometry
+
+text
+
+---
+
+## ✅ 最後確認步驟
+
+1. **在您的 GitHub 倉庫根目錄**中，確認有以下檔案（名稱完全一致）：
+   - `.nojekyll` (空白)
+   - `index.html`
+   - `about-me.html`
+   - `extended_abstract.html`
+   - `README.md`
+   - `marching_cubes_no_lut.py` (您原本的程式)
+
+2. **確認 `images/` 資料夾**內有三個檔案，檔名**完全小寫**：
+   - `author.jpg`
+   - `sphere.png`
+   - `hyperboloid.png`
+
+3. **等待 2 分鐘**後，用無痕模式訪問：
+   - 首頁：`https://chday169.github.io/MCA_WITHOUT_LOOKTABLE/`
+   - 作者頁：`https://chday169.github.io/MCA_WITHOUT_LOOKTABLE/about-me.html`
+   - 摘要頁：`https://chday169.github.io/MCA_WITHOUT_LOOKTABLE/extended_abstract.html`
+
+所有圖片應該都能正常顯示，數學公式也能渲染。
+
+如果還有任何一個圖片顯示破裂，請在瀏覽器按 `F12` → 點選 `Network` 標籤 → 重新整理頁面 → 查看是哪個檔案回傳 404，然後回報給我那個檔案名稱，我再協助您確認。

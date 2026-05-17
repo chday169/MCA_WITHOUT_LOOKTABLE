@@ -4,14 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extended Abstract: Geometric Marching Cubes Without Lookup Tables</title>
-    <!-- MathJax for LaTeX formulas -->
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Georgia', 'Times New Roman', 'Segoe UI', serif;
             background-color: #faf9f8;
@@ -27,51 +22,30 @@
             border-radius: 1rem;
             padding: 2rem 2.5rem;
         }
-        @media (max-width: 700px) {
-            .container {
-                padding: 1.5rem;
-            }
-        }
+        @media (max-width: 700px) { .container { padding: 1.5rem; } }
         h1 {
             font-size: 1.8rem;
             border-left: 5px solid #2c7da0;
             padding-left: 1rem;
-            margin-top: 0;
             margin-bottom: 0.5rem;
-            font-weight: 600;
         }
-        .subtitle {
-            font-size: 1.2rem;
-            color: #2c7da0;
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
+        .subtitle { font-size: 1.2rem; color: #2c7da0; margin-bottom: 2rem; font-style: italic; }
         h2 {
             font-size: 1.4rem;
-            margin: 1.5rem 0 0.8rem 0;
+            margin: 1.5rem 0 0.8rem;
             color: #1e4663;
             border-bottom: 1px solid #cbd5e1;
             padding-bottom: 0.2rem;
         }
-        p {
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
-        ul, ol {
-            margin: 0.8rem 0 1rem 1.8rem;
-        }
-        li {
-            margin-bottom: 0.3rem;
-        }
+        p { margin-bottom: 1rem; text-align: justify; }
+        ul, ol { margin: 0.8rem 0 1rem 1.8rem; }
+        li { margin-bottom: 0.3rem; }
         .keywords {
             background: #f1f5f9;
             padding: 1rem 1.5rem;
             border-radius: 1rem;
             margin: 1.5rem 0;
             font-size: 0.9rem;
-        }
-        .keywords strong {
-            color: #1e4663;
         }
         .author-block {
             margin-top: 2rem;
@@ -87,30 +61,11 @@
             margin: 1rem 0;
             font-size: 0.9rem;
         }
-        .equation {
-            margin: 1rem 0;
-            text-align: center;
-            overflow-x: auto;
-        }
-        .footer-nav {
-            margin-top: 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-        a {
-            color: #2c7da0;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        code {
-            background: #f1f5f9;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.3rem;
-            font-family: monospace;
-            font-size: 0.9em;
-        }
+        .equation { margin: 1rem 0; text-align: center; overflow-x: auto; }
+        .footer-nav { margin-top: 2rem; text-align: center; font-size: 0.85rem; }
+        a { color: #2c7da0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 0.3rem; font-family: monospace; }
     </style>
 </head>
 <body>
@@ -124,65 +79,32 @@
 
     <h2>Method Overview</h2>
     <p>The method begins from the implicit function:</p>
-    <div class="equation">
-        \[
-        f(x,y,z) = 0
-        \]
-    </div>
+    <div class="equation">\[ f(x,y,z) = 0 \]</div>
     <p>which defines a continuous surface in 3D space. Instead of classifying cube topology through precomputed tables, the proposed approach directly analyzes sign changes of the scalar field values along cube edges.</p>
-    <p>For a unit cube (voxel cell):<br>
-    <strong>8 vertices</strong> and <strong>12 edges</strong> are examined.</p>
+    <p>For a unit cube (voxel cell):<br><strong>8 vertices</strong> and <strong>12 edges</strong> are examined.</p>
     <p>For each edge with endpoints \( P_1, P_2 \) and scalar values \( f_1 = f(P_1), f_2 = f(P_2) \), the following conditions are evaluated:</p>
-    <ul>
-        <li>If \( f_1 \cdot f_2 > 0 \), then no surface intersection exists on that edge.</li>
-        <li>If \( f_1 \cdot f_2 < 0 \), then the implicit surface must cross the edge.</li>
-    </ul>
+    <ul><li>If \( f_1 \cdot f_2 > 0 \), then no surface intersection exists on that edge.</li><li>If \( f_1 \cdot f_2 < 0 \), then the implicit surface must cross the edge.</li></ul>
     <p>The intersection point is computed using linear interpolation:</p>
-    <div class="equation">
-        \[
-        P = P_1 + t \cdot (P_2 - P_1), \quad t = \frac{0 - f_1}{f_2 - f_1} = \frac{f_1}{f_1 - f_2}
-        \]
-    </div>
+    <div class="equation">\[ P = P_1 + t \cdot (P_2 - P_1), \quad t = \frac{0 - f_1}{f_2 - f_1} = \frac{f_1}{f_1 - f_2} \]</div>
     <p>Thus, all generated intersection points approximately satisfy \( f(P) \approx 0 \) and therefore lie on the implicit surface.</p>
     <p>After detecting all intersected edges within a cube, neighboring intersection points are geometrically connected to form local surface patches. The algorithm then marches to adjacent cubes and repeats the same process throughout the voxel space.</p>
 
     <h2>Key Insights</h2>
     <p>This interpretation reveals that the true essence of Marching Cubes is not the lookup table itself, but rather:</p>
-    <ul>
-        <li>sign-crossing detection</li>
-        <li>geometric approximation of implicit surfaces within discretized space</li>
-    </ul>
+    <ul><li>sign-crossing detection</li><li>geometric approximation of implicit surfaces within discretized space</li></ul>
     <p>The proposed viewpoint emphasizes:</p>
-    <ul>
-        <li>implicit geometry</li>
-        <li>sign-transition surfaces</li>
-        <li>edge-based interpolation</li>
-        <li>local geometric reconstruction</li>
-    </ul>
+    <ul><li>implicit geometry</li><li>sign-transition surfaces</li><li>edge-based interpolation</li><li>local geometric reconstruction</li></ul>
     <p>instead of topology enumeration.</p>
 
     <h2>From 2D to 3D</h2>
     <p>The framework naturally extends from:</p>
-    <ul>
-        <li>2D contour extraction → polygon approximation → marching squares</li>
-        <li>to: 3D isosurface extraction → voxel traversal → local surface patch generation</li>
-    </ul>
+    <ul><li>2D contour extraction → polygon approximation → marching squares</li><li>to: 3D isosurface extraction → voxel traversal → local surface patch generation</li></ul>
     <p>This concept also closely relates to modern fields such as:</p>
-    <ul>
-        <li>Signed Distance Functions (SDF)</li>
-        <li>Level Set Methods</li>
-        <li>Implicit Geometry</li>
-        <li>Scientific Visualization</li>
-        <li>Medical CT/MRI Reconstruction</li>
-        <li>Volume Rendering</li>
-    </ul>
+    <ul><li>Signed Distance Functions (SDF)</li><li>Level Set Methods</li><li>Implicit Geometry</li><li>Scientific Visualization</li><li>Medical CT/MRI Reconstruction</li><li>Volume Rendering</li></ul>
 
     <h2>Implementation & Demonstration</h2>
     <p>The author has implemented preliminary visualization systems using:</p>
-    <ul>
-        <li>Python (NumPy, Matplotlib)</li>
-        <li>TurboWarp / Scratch-based environments</li>
-    </ul>
+    <ul><li>Python (NumPy, Matplotlib)</li><li>TurboWarp / Scratch-based environments</li></ul>
     <p>demonstrating real-time rendering of implicit 3D surfaces generated directly from mathematical functions without lookup tables.</p>
     <p>The work aims to provide a more intuitive and geometrically transparent understanding of MCA, particularly for educational visualization, mathematical modeling, and implicit surface research.</p>
 
@@ -191,7 +113,7 @@
     </div>
 
     <div class="author-block">
-        <strong>Author:</strong> (Your Name)<br>
+        <strong>Author:</strong> C.H. Tai (戴清河)<br>
         <strong>Preliminary Development Period:</strong> Initial concept development and experimental implementation were independently explored approximately 2–3 years prior to this publication using Python and TurboWarp-based visualization systems.
     </div>
 
@@ -202,7 +124,7 @@
     <div class="footer-nav">
         <a href="README.md">📖 README</a> &nbsp;|&nbsp;
         <a href="about-me.html">👤 About the Author</a> &nbsp;|&nbsp;
-        <a href="https://github.com/yourname/MCA-WITHOUT-LOOKUPTABLE">🔗 GitHub Repository</a>
+        <a href="https://github.com/chday169/MCA_WITHOUT_LOOKTABLE">🔗 GitHub Repository</a>
     </div>
 </div>
 </body>

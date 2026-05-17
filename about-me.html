@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>關於作者 | About Me — Marching Cubes 無查表法</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, sans-serif;
             background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
             min-height: 100vh;
             display: flex;
@@ -55,12 +51,8 @@
             margin-bottom: 1rem;
             border: 3px solid white;
         }
-        .header h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-        .header .badge {
+        .header h1 { font-size: 2rem; font-weight: 600; }
+        .badge {
             display: inline-block;
             background: #2c7da0;
             padding: 0.2rem 1rem;
@@ -68,48 +60,32 @@
             font-size: 0.8rem;
             margin-top: 0.5rem;
         }
-        .content {
-            padding: 2rem;
-        }
+        .content { padding: 2rem; }
         .lang-section {
             margin-bottom: 2rem;
             border-bottom: 1px dashed #cbd5e1;
             padding-bottom: 1.5rem;
         }
-        .lang-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
+        .lang-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .lang-title {
             font-size: 1.4rem;
             font-weight: 600;
             color: #2c7da0;
-            margin-bottom: 0.8rem;
             display: inline-block;
             border-left: 4px solid #2c7da0;
             padding-left: 0.8rem;
+            margin-bottom: 0.8rem;
         }
         .intro {
             background: #f1f5f9;
             padding: 1rem 1.2rem;
             border-radius: 1rem;
             margin: 1rem 0;
-            font-size: 1rem;
-            line-height: 1.5;
             border-left: 4px solid #2c7da0;
         }
-        p {
-            margin-bottom: 0.8rem;
-            line-height: 1.6;
-            color: #1e2a3a;
-        }
-        ul {
-            margin: 0.5rem 0 1rem 1.5rem;
-        }
-        li {
-            margin-bottom: 0.3rem;
-        }
+        p { margin-bottom: 0.8rem; line-height: 1.6; color: #1e2a3a; }
+        ul { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
         .highlight {
             background: #eef2ff;
             padding: 0.5rem 0.8rem;
@@ -125,20 +101,8 @@
             color: #475569;
             border-top: 1px solid #e2e8f0;
         }
-        a {
-            color: #2c7da0;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .icon {
-            font-size: 1.1rem;
-            margin-right: 0.3rem;
-        }
-        .emoji {
-            font-size: 1.2rem;
-        }
+        a { color: #2c7da0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -146,11 +110,10 @@
     <div class="header">
         <img src="images/author.jpg" alt="戴清河 照片" class="avatar" 
              onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<div class=\"avatar-fallback\">CT</div>');">
-        <h1>🧑‍💻 戴清河 · C.H. Day(chday169)</h1>
+        <h1>🧑‍💻 戴清河 · C.H. Day (chday169)</h1>
         <div class="badge">土木及水利工程技師 (退休) | 數學與3D製圖愛好者</div>
     </div>
     <div class="content">
-        <!-- 繁體中文部分 -->
         <div class="lang-section">
             <div class="lang-title">📖 中文 / 繁體</div>
             <div class="intro">
@@ -165,12 +128,8 @@
                 <li>✅ 提供 Python 高效實現，也適合移植到 Scratch/TurboWarp 用於教學演示</li>
             </ul>
             <p>我深信：<strong>視覺化即理解</strong>。無論是結構分析、流體力學，還是數學曲面，將抽象符號轉為圖形，能讓更多人享受探索的樂趣。</p>
-            <div class="highlight">
-                🧪 實驗環境：Python + NumPy + Matplotlib &nbsp;|&nbsp; 🎮 TurboWarp / Scratch 3.0
-            </div>
+            <div class="highlight">🧪 實驗環境：Python + NumPy + Matplotlib &nbsp;|&nbsp; 🎮 TurboWarp / Scratch 3.0</div>
         </div>
-
-        <!-- 英文部分 -->
         <div class="lang-section">
             <div class="lang-title">🇬🇧 English / 英文</div>
             <div class="intro">
@@ -185,14 +144,12 @@
                 <li>✅ Efficient Python implementation, plus ready adaptation for Scratch/TurboWarp for educational demonstrations</li>
             </ul>
             <p>I firmly believe: <strong>Visualization is understanding</strong>. Whether it’s structural analysis, fluid mechanics, or mathematical surfaces, turning abstract symbols into graphics allows more people to enjoy the joy of exploration.</p>
-            <div class="highlight">
-                🧪 Tech stack: Python + NumPy + Matplotlib &nbsp;|&nbsp; 🎮 TurboWarp / Scratch 3.0
-            </div>
+            <div class="highlight">🧪 Tech stack: Python + NumPy + Matplotlib &nbsp;|&nbsp; 🎮 TurboWarp / Scratch 3.0</div>
         </div>
     </div>
     <div class="footer">
-        <span class="icon">📫</span> 歡迎交流數學與程式碼 | Feel free to reach out about math & coding<br>
-        <span class="emoji">🧭</span> 保持好奇 · 享受幾何 · 退休不褪色 | Stay curious · Enjoy geometry · Retired but not tired
+        <span>📫 歡迎交流數學與程式碼 | Feel free to reach out about math & coding<br>
+        🧭 保持好奇 · 享受幾何 · 退休不褪色 | Stay curious · Enjoy geometry · Retired but not tired</span>
     </div>
 </div>
 </body>
