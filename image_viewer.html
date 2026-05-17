@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片檢視器 | Marching Cubes 成果圖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #1e2a3a;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .viewer-container {
+            background: white;
+            border-radius: 2rem;
+            max-width: 1200px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+        }
+        .header {
+            background: #2c7da0;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        .image-area {
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            min-height: 500px;
+        }
+        .image-area img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: #e9edf2;
+        }
+        button {
+            background: #2c7da0;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #1e5a73;
+        }
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #cbd5e1;
+        }
+        .thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.1s;
+        }
+        .thumb.active {
+            border-color: #2c7da0;
+            transform: scale(1.05);
+        }
+        .footer-nav {
+            text-align: center;
+            padding: 1rem;
+            background: #f8fafc;
+            font-size: 0.85rem;
+        }
+        a {
+            color: #2c7da0;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* 模態框（點擊圖片放大） */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 1rem;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="viewer-container">
+    <div class="header">
+        <h1>🖼️ Marching Cubes 成果圖檢視器</h1>
+        <p>球體 (Sphere) 與 雙曲面 (Hyperboloid) — 無查表法重建</p>
+    </div>
+
+    <div class="image-area">
+        <img id="mainImage" src="images/sphere.png" alt="成果圖">
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn">◀ 上一張</button>
+        <button id="nextBtn">下一張 ▶</button>
+    </div>
+
+    <div class="thumbnails">
+        <img class="thumb" data-img="images/sphere.png" src="images/sphere.png" alt="球體">
+        <img class="thumb" data-img="images/hyperboloid.png" src="images/hyperboloid.png" alt="雙曲面">
+    </div>
+
+    <div class="footer-nav">
+        <a href="index.html">🏠 回首頁</a> | 
+        <a href="about-me.html">👤 關於作者</a> | 
+        <a href="extended_abstract.html">📄 擴展摘要</a> |
+        <a href="README.md">📖 README</a>
+    </div>
+</div>
+
+<!-- 點擊圖片放大的模態框 -->
+<div id="modal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img id="modalImg" src="">
+</div>
+
+<script>
+    const images = [
+        "images/sphere.png",
+        "images/hyperboloid.png"
+    ];
+    let currentIndex = 0;
+    const mainImg = document.getElementById("mainImage");
+    const thumbs = document.querySelectorAll(".thumb");
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const closeModal = document.querySelector(".modal-close");
+
+    function updateImage(index) {
+        currentIndex = (index + images.length) % images.length;
+        mainImg.src = images[currentIndex];
+        thumbs.forEach((thumb, i) => {
+            if (thumb.getAttribute("data-img") === images[currentIndex]) {
+                thumb.classList.add("active");
+            } else {
+                thumb.classList.remove("active");
+            }
+        });
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => updateImage(currentIndex - 1));
+    document.getElementById("nextBtn").addEventListener("click", () => updateImage(currentIndex + 1));
+
+    thumbs.forEach(thumb => {
+        thumb.addEventListener("click", () => {
+            const imgPath = thumb.getAttribute("data-img");
+            const newIndex = images.indexOf(imgPath);
+            if (newIndex !== -1) updateImage(newIndex);
+        });
+    });
+
+    // 點擊主圖放大
+    mainImg.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modalImg.src = mainImg.src;
+    });
+    closeModal.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    });
+
+    // 初始高亮
+    updateImage(0);
+</script>
+</body>
+</html>
