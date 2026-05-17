@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於作者 | About Me — Marching Cubes 無查表法</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .card {
+            max-width: 1000px;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: #1e2a3a;
+            color: white;
+            padding: 2rem 2rem 1.5rem;
+            text-align: center;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .header .badge {
+            display: inline-block;
+            background: #2c7da0;
+            padding: 0.2rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .content {
+            padding: 2rem;
+        }
+        .lang-section {
+            margin-bottom: 2rem;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 1.5rem;
+        }
+        .lang-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .lang-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c7da0;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            border-left: 4px solid #2c7da0;
+            padding-left: 0.8rem;
+        }
+        .intro {
+            background: #f1f5f9;
+            padding: 1rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-left: 4px solid #2c7da0;
+        }
+        p {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            color: #1e2a3a;
+        }
+        ul {
+            margin: 0.5rem 0 1rem 1.5rem;
+        }
+        li {
+            margin-bottom: 0.3rem;
+        }
+        .highlight {
+            background: #eef2ff;
+            padding: 0.5rem 0.8rem;
+            border-radius: 0.6rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .footer {
+            background: #f8fafc;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+        a {
+            color: #2c7da0;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .icon {
+            font-size: 1.1rem;
+            margin-right: 0.3rem;
+        }
+        .emoji {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="header">
+        <img src="images/author.jpg" alt="戴清河 照片" class="avatar">
+        <h1>🧑‍💻 戴清河 · C.H. Day(chday169)</h1>
+        <div class="badge">土木及水利工程技師 (退休) | 數學與3D製圖愛好者</div>
+    </div>
+    <div class="content">
+        <!-- 繁體中文部分 -->
+        <div class="lang-section">
+            <div class="lang-title">📖 中文 / 繁體</div>
+            <div class="intro">
+                <p>🏗️ 我是一位<strong>土木及水利工程技師</strong>，已退休。<br>
+                ✨ 退休後最快樂的事：<strong>分享數學概念</strong>、寫工程實用程式，以及進行 <strong>數學 3D 製圖</strong>。</p>
+            </div>
+            <p>在多年的工程實務中，我發現許多工程計算程式或數學 2D/3D 圖形繪製，其實都可以借助 <strong>Scratch</strong> 或 <strong>TurboWarp</strong> 這類視覺化平台來實現。它們不僅<strong>實用、直觀</strong>，還能大大降低學習門檻，讓抽象的數理概念變得生動有趣。</p>
+            <p>這個倉庫 <strong>MCA-WITHOUT-LOOKUPTABLE</strong> 正是我這一理念的體現：</p>
+            <ul>
+                <li>✅ 不依賴傳統 256 種查表，純幾何推理 Marching Cubes 演算法</li>
+                <li>✅ 從 2D Marching Squares 自然升維到 3D 隱式曲面</li>
+                <li>✅ 提供 Python 高效實現，也適合移植到 Scratch/TurboWarp 用於教學演示</li>
+            </ul>
+            <p>我深信：<strong>視覺化即理解</strong>。無論是結構分析、流體力學，還是數學曲面，將抽象符號轉為圖形，能讓更多人享受探索的樂趣。</p>
+            <div class="highlight">
+                🧪 實驗環境：Python + NumPy + Matplotlib &nbsp;|&nbsp; 🎮 TurboWarp / Scratch 3.0
+            </div>
+        </div>
+
+        <!-- 英文部分 -->
+        <div class="lang-section">
+            <div class="lang-title">🇬🇧 English / 英文</div>
+            <div class="intro">
+                <p>🏗️ I am a <strong>Civil and Hydraulic Engineering Technician</strong>, now retired.<br>
+                ✨ What brings me the most joy in retirement is <strong>sharing mathematical concepts</strong>, writing practical engineering programs, and creating <strong>mathematical 3D graphics</strong>.</p>
+            </div>
+            <p>Throughout years of engineering practice, I realized that many engineering computation routines or 2D/3D mathematical plots can be effectively implemented using <strong>Scratch</strong> or <strong>TurboWarp</strong>. These platforms are not only <strong>practical and visual</strong>, but also greatly lower the learning curve, making abstract mathematical ideas tangible and engaging.</p>
+            <p>This repository <strong>MCA-WITHOUT-LOOKUPTABLE</strong> embodies that vision:</p>
+            <ul>
+                <li>✅ A pure geometric interpretation of Marching Cubes — no traditional 256-case lookup table</li>
+                <li>✅ Natural dimensional extension from 2D Marching Squares to 3D implicit surfaces</li>
+                <li>✅ Efficient Python implementation, plus ready adaptation for Scratch/TurboWarp for educational demonstrations</li>
+            </ul>
+            <p>I firmly believe: <strong>Visualization is understanding</strong>. Whether it’s structural analysis, fluid mechanics, or mathematical surfaces, turning abstract symbols into graphics allows more people to enjoy the joy of exploration.</p>
+            <div class="highlight">
+                🧪 Tech stack: Python + NumPy + Matplotlib &nbsp;|&nbsp; 🎮 TurboWarp / Scratch 3.0
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <span class="icon">📫</span> 歡迎交流數學與程式碼 | Feel free to reach out about math & coding<br>
+        <span class="emoji">🧭</span> 保持好奇 · 享受幾何 · 退休不褪色 | Stay curious · Enjoy geometry · Retired but not tired
+    </div>
+</div>
+</body>
+</html>
