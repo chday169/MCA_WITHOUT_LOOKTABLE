@@ -93,6 +93,31 @@
             font-family: monospace;
             font-size: 0.9rem;
         }
+        /* 導航按鈕樣式 */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 1.5rem 0.5rem;
+            padding: 0.8rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .nav-links a {
+            background: #2c7da0;
+            color: white;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .nav-links a:hover {
+            background: #1e5a73;
+            text-decoration: none;
+        }
         .footer {
             background: #f8fafc;
             padding: 1rem 2rem;
@@ -113,6 +138,16 @@
         <h1>🧑‍💻 戴清河 · C.H. Day (chday169)</h1>
         <div class="badge">土木及水利工程技師 (退休) | 數學與3D製圖愛好者</div>
     </div>
+
+    <!-- 導航按鈕區塊：可回首頁、圖片檢視器、PDF 檢視器等 -->
+    <div class="nav-links">
+        <a href="index.html">🏠 回首頁</a>
+        <a href="image_viewer.html">🖼️ 圖片檢視器</a>
+        <a href="pdf_viewer.html">📑 PDF 論文</a>
+        <a href="extended_abstract.html">📄 擴展摘要</a>
+        <a href="README.md">📖 README</a>
+    </div>
+
     <div class="content">
         <div class="lang-section">
             <div class="lang-title">📖 中文 / 繁體</div>
