@@ -85,6 +85,7 @@
             padding: 1rem;
             background: white;
             border-top: 1px solid #cbd5e1;
+            flex-wrap: wrap;
         }
         .thumb {
             width: 80px;
@@ -145,11 +146,11 @@
 <div class="viewer-container">
     <div class="header">
         <h1>🖼️ Marching Cubes 成果圖檢視器</h1>
-        <p>球體 (Sphere) 與 雙曲面 (Hyperboloid) — 無查表法重建</p>
+        <p>球體、雙曲面、心形、螺旋管、星形、波浪面、橢球面等多種幾何</p>
     </div>
 
     <div class="image-area">
-        <img id="mainImage" src="images/sphere.png" alt="成果圖">
+        <img id="mainImage" src="images/0_sphere.png" alt="成果圖">
     </div>
 
     <div class="controls">
@@ -160,14 +161,14 @@
     <div class="thumbnails">
         <img class="thumb" data-img="images/0_sphere.png" src="images/0_sphere.png" alt="球體">
         <img class="thumb" data-img="images/0_hyperboloid.png" src="images/0_hyperboloid.png" alt="雙曲面">
-		<img class="thumb" data-img="images/1_heart.png" src="images/1_heart.png" alt="心形">
-		<img class="thumb" data-img="images/1_sphere.png" src="images/1_sphere.png" alt="球面">
-		<img class="thumb" data-img="images/1_spiraltube.png" src="images/1_spiraltube.png" alt="螺旋管">
-		<img class="thumb" data-img="images/1_star.png" src="images/1_star.png" alt="星形球殼">
-        <img class="thumb" data-img="images/1_wave.png" src="images/1_wave.png" alt="1_波浪面">		   
-		<img class="thumb" data-img="images/2_colors-sphere.png" src="images/2_colors-sphere.png" alt="球面">
-		<img class="thumb" data-img="images/2_ellipsoid.png" src="2_ellipsoid.png" alt="橢球面">
-		<img class="thumb" data-img="images/2_monocolor_sphere.png" src="2_monocolor_sphere.png" alt="球面">
+        <img class="thumb" data-img="images/1_heart.png" src="images/1_heart.png" alt="心形">
+        <img class="thumb" data-img="images/1_sphere.png" src="images/1_sphere.png" alt="球面">
+        <img class="thumb" data-img="images/1_spiraltube.png" src="images/1_spiraltube.png" alt="螺旋管">
+        <img class="thumb" data-img="images/1_star.png" src="images/1_star.png" alt="星形球殼">
+        <img class="thumb" data-img="images/1_wave.png" src="images/1_wave.png" alt="波浪面">
+        <img class="thumb" data-img="images/2_colors-sphere.png" src="images/2_colors-sphere.png" alt="彩色球面">
+        <img class="thumb" data-img="images/2_ellipsoid.png" src="images/2_ellipsoid.png" alt="橢球面">
+        <img class="thumb" data-img="images/2_monocolor_sphere.png" src="images/2_monocolor_sphere.png" alt="單色球面">
     </div>
 
     <div class="footer-nav">
@@ -185,10 +186,20 @@
 </div>
 
 <script>
+    // 完整圖片路徑列表（與縮圖 data-img 完全一致）
     const images = [
-        "images/sphere.png",
-        "images/hyperboloid.png"
+        "images/0_sphere.png",
+        "images/0_hyperboloid.png",
+        "images/1_heart.png",
+        "images/1_sphere.png",
+        "images/1_spiraltube.png",
+        "images/1_star.png",
+        "images/1_wave.png",
+        "images/2_colors-sphere.png",
+        "images/2_ellipsoid.png",
+        "images/2_monocolor_sphere.png"
     ];
+
     let currentIndex = 0;
     const mainImg = document.getElementById("mainImage");
     const thumbs = document.querySelectorAll(".thumb");
@@ -196,11 +207,13 @@
     const modalImg = document.getElementById("modalImg");
     const closeModal = document.querySelector(".modal-close");
 
+    // 更新主圖與縮圖高亮
     function updateImage(index) {
         currentIndex = (index + images.length) % images.length;
         mainImg.src = images[currentIndex];
-        thumbs.forEach((thumb, i) => {
-            if (thumb.getAttribute("data-img") === images[currentIndex]) {
+        thumbs.forEach(thumb => {
+            const thumbPath = thumb.getAttribute("data-img");
+            if (thumbPath === images[currentIndex]) {
                 thumb.classList.add("active");
             } else {
                 thumb.classList.remove("active");
@@ -208,9 +221,11 @@
         });
     }
 
+    // 上一張 / 下一張
     document.getElementById("prevBtn").addEventListener("click", () => updateImage(currentIndex - 1));
     document.getElementById("nextBtn").addEventListener("click", () => updateImage(currentIndex + 1));
 
+    // 點擊縮圖切換
     thumbs.forEach(thumb => {
         thumb.addEventListener("click", () => {
             const imgPath = thumb.getAttribute("data-img");
@@ -229,7 +244,7 @@
         if (e.target === modal) modal.style.display = "none";
     });
 
-    // 初始高亮
+    // 初始化顯示第一張圖片
     updateImage(0);
 </script>
 </body>
