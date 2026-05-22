@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marching Cubes 無查表法 · 幾何重建｜水利 × 邊坡應用</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f0f4f8;
+            color: #1e2a3a;
+            line-height: 1.5;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1e4663, #2c7da0);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .hero p { max-width: 700px; margin: 0.5rem auto 0; opacity: 0.9; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        .section-title {
+            font-size: 1.6rem;
+            border-left: 5px solid #2c7da0;
+            padding-left: 1rem;
+            margin: 2rem 0 1rem;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.1); }
+        .card h3 { color: #2c7da0; margin-bottom: 0.75rem; }
+        .card p { color: #2d3e50; margin-bottom: 1rem; }
+        .btn {
+            display: inline-block;
+            background: #2c7da0;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #2c7da0;
+            color: #2c7da0;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: #e2e8f0;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+        }
+        a { text-decoration: none; }
+        hr { margin: 1rem 0; }
+        pre {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="hero">
+    <h1>🧊 Geometric Marching Cubes<br>Without Lookup Tables</h1>
+    <p>從 2D 到 3D 隱式曲面重建 · 無查表純幾何推理<br>✨ 新擴充：水資源模擬 + 邊坡穩定分析 ✨</p>
+</div>
+<div class="container">
+    <div class="section-title">📌 核心專案</div>
+    <div class="card-grid">
+        <div class="card">
+            <h3>📄 擴展摘要</h3>
+            <p>幾何演算法推導、數學原理與無查表實作細節。</p>
+            <a href="extended_abstract.html" class="btn">閱讀 →</a>
+        </div>
+        <div class="card">
+            <h3>👤 關於作者</h3>
+            <p>土木水利技師 戴清河，退休後專注數學視覺化與工程應用。</p>
+            <a href="about_me.html" class="btn">認識 →</a>
+        </div>
+        <div class="card">
+            <h3>🖼️ 成果圖庫</h3>
+            <p>球體、雙曲面、心形、螺旋管等 10+ 種幾何重建。</p>
+            <a href="image_viewer.html" class="btn">檢視 →</a>
+        </div>
+        <div class="card">
+            <h3>📑 論文 PDF</h3>
+            <p>完整報告與實作文件下載。</p>
+            <a href="pdf_viewer.html" class="btn">開啟 →</a>
+        </div>
+    </div>
+
+    <div class="section-title">🌊 應用領域擴充 (V1 新章節)</div>
+    <div class="card-grid">
+        <div class="card">
+            <h3>💧 水資源・水利與水理</h3>
+            <p>隱式曲面重建河床地形、地下水位面、流速場可視化，輔助洪水模擬與水理分析。</p>
+            <a href="hydrology_app.html" class="btn btn-outline">探索水利應用 →</a>
+        </div>
+        <div class="card">
+            <h3>⛰️ 土壤及岩石邊坡穩定</h3>
+            <p>生成潛在滑動面、地層界面，結合極限平衡法評估安全係數，適用於順向坡、崩塌地。</p>
+            <a href="slope_stability_app.html" class="btn btn-outline">探索邊坡應用 →</a>
+        </div>
+    </div>
+
+    <div class="section-title">🧪 演算法快速體驗</div>
+    <div class="card">
+        <p>Python 實現 (NumPy + Matplotlib) — 即時提取隱式曲面，完全無查表依賴。</p>
+        <pre><code>git clone https://github.com/chday169/MCA_WITHOUT_LOOKTABLE-V1
+cd MCA_WITHOUT_LOOKTABLE-V1
+python mcs_combined_viewer.py</code></pre>
+        <a href="README.md" class="btn">📖 完整 README</a>
+    </div>
+</div>
+<div class="footer">
+    <a href="https://github.com/chday169/MCA_WITHOUT_LOOKTABLE-V1">🔗 GitHub 倉儲 (V1)</a> &nbsp;|&nbsp;
+    保持好奇 · 幾何即理解 · 退休不褪色
+</div>
+</body>
+</html>
